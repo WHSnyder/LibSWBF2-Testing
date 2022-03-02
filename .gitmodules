@@ -1,0 +1,3 @@
+[submodule "LibSWBF2"]
+	path = LibSWBF2
+	url = git@github.com:LibSWBF2/LibSWBF2.git
