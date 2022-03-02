@@ -1,3 +1,4 @@
 [submodule "LibSWBF2"]
 	path = LibSWBF2
-	url = git@github.com:LibSWBF2/LibSWBF2.git
+	url = git@github.com:WHSnyder/LibSWBF2.git
+	branch = feature/soundstreams

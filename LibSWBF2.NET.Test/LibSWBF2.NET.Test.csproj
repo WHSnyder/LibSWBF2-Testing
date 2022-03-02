@@ -80,7 +80,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\libSWBF2\LibSWBF2.NET\LibSWBF2.NET.csproj">
+    <ProjectReference Include="..\libSWBF2\LibSWBF2.NET\LibSWBF2.NET.csproj">
       <Project>{5a2adcc9-c997-4a17-84fa-a759dd6e5384}</Project>
       <Name>LibSWBF2.NET</Name>
     </ProjectReference>
@@ -88,18 +88,14 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--Due some strange mono bug, xbuild only differentiates between Windows and Unix, so we detect Mac by checking for libc.dylib-->
   <PropertyGroup Condition="'$(OS)' == 'Unix' or  $([System.IO.File]::Exists('/usr/lib/libstdc++.dylib')) or $([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
-    <PostBuildEvent>cp "/Users/will/projects/swbf2/libSWBF2/LibSWBF2/build/libSWBF2.dylib" "$(TargetDir)libSWBF2.dylib"</PostBuildEvent>
-    <!--
-    <PostBuildEvent>cp "$(TargetDir)../../../build/LibSWBF2/libLibSWBF2.dylib" "$(TargetDir)libLibSWBF2.dylib"</PostBuildEvent>
-    <PostBuildEvent>cp "$(TargetDir)../../../build/LibSWBF2/libLibSWBF2.dylib" "$(TargetDir)libLibSWBF2.dylib"</PostBuildEvent>
-    -->
+    <PostBuildEvent>cp "../LibSWBF2/LibSWBF2/build/libSWBF2.dylib" "$(TargetDir)libSWBF2.dylib"</PostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(OS)' == 'Unix' and  !$([System.IO.File]::Exists('/usr/lib/libstdc++.dylib')) and !$([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
-    <PostBuildEvent>cp "$(TargetDir)../../../build/LibSWBF2/libLibSWBF2.so" "$(TargetDir)libLibSWBF2.so"</PostBuildEvent>
+    <PostBuildEvent>cp "../LibSWBF2/LibSWBF2/build/LibSWBF2/libLibSWBF2.so" "$(TargetDir)libLibSWBF2.so"</PostBuildEvent>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-    <PostBuildEvent>copy "$(SolutionDir)x64\$(ConfigurationName)\LibSWBF2.dll" "$(TargetDir)LibSWBF2.dll" /y</PostBuildEvent>
+    <PostBuildEvent>copy "..\LibSWBF2\LibSWBF2\build\LibSWBF2\LibSWBF2.dll" "$(TargetDir)LibSWBF2.dll" /y</PostBuildEvent>
   </PropertyGroup>
 </Project>
