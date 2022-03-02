@@ -72,9 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="testSoundStreams.cs" />
-    <Compile Include="soundUtils.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SoundUtils.cs" />
     <Compile Include="TestBench.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -88,14 +88,14 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--Due some strange mono bug, xbuild only differentiates between Windows and Unix, so we detect Mac by checking for libc.dylib-->
   <PropertyGroup Condition="'$(OS)' == 'Unix' or  $([System.IO.File]::Exists('/usr/lib/libstdc++.dylib')) or $([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
-    <PostBuildEvent>cp "../LibSWBF2/LibSWBF2/build/libSWBF2.dylib" "$(TargetDir)libSWBF2.dylib"</PostBuildEvent>
+    <PostBuildEvent>cp "$(TargetDir)../../../LibSWBF2/LibSWBF2/build/libSWBF2.dylib" "$(TargetDir)libSWBF2.dylib"</PostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(OS)' == 'Unix' and  !$([System.IO.File]::Exists('/usr/lib/libstdc++.dylib')) and !$([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
-    <PostBuildEvent>cp "../LibSWBF2/LibSWBF2/build/LibSWBF2/libLibSWBF2.so" "$(TargetDir)libLibSWBF2.so"</PostBuildEvent>
+    <PostBuildEvent>cp "$(TargetDir)../../../LibSWBF2/LibSWBF2/build/LibSWBF2/libLibSWBF2.so" "$(TargetDir)libLibSWBF2.so"</PostBuildEvent>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
-    <PostBuildEvent>copy "..\LibSWBF2\LibSWBF2\build\LibSWBF2\LibSWBF2.dll" "$(TargetDir)LibSWBF2.dll" /y</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)..\..\..\LibSWBF2\LibSWBF2\build\LibSWBF2\LibSWBF2.dll" "$(TargetDir)LibSWBF2.dll" /y</PostBuildEvent>
   </PropertyGroup>
 </Project>
