@@ -71,8 +71,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="testSoundStreams.cs" />
-    <Compile Include="SoundUtils.cs" />
+    <Compile Include="testWorldsInstances.cs" />
+    <!-- <Compile Include="Sound/PrintWav.cs" /> -->
+    <!-- <Compile Include="SoundUtils.cs" /> -->
     <Compile Include="TestBench.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -80,7 +81,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <!--
+      USE THIS ONE AFTER AUDIOSTREAMER DONE!
     <ProjectReference Include="..\libSWBF2\LibSWBF2.NET\LibSWBF2.NET.csproj">
+      <Project>{5a2adcc9-c997-4a17-84fa-a759dd6e5384}</Project>
+      <Name>LibSWBF2.NET</Name>
+    </ProjectReference>
+    -->
+    <ProjectReference Include="/Users/will/projects/swbf2/libSWBF2/LibSWBF2.NET/LibSWBF2.NET.csproj">
       <Project>{5a2adcc9-c997-4a17-84fa-a759dd6e5384}</Project>
       <Name>LibSWBF2.NET</Name>
     </ProjectReference>
@@ -88,7 +96,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--Due some strange mono bug, xbuild only differentiates between Windows and Unix, so we detect Mac by checking for libc.dylib-->
   <PropertyGroup Condition="'$(OS)' == 'Unix' or  $([System.IO.File]::Exists('/usr/lib/libstdc++.dylib')) or $([System.IO.File]::Exists('/usr/lib/libc.dylib'))">
+    <!--
+      USE THIS ONE AFTER AUDIOSTREAMER DONE
     <PostBuildEvent>cp "$(TargetDir)../../../LibSWBF2/LibSWBF2/build/libSWBF2.dylib" "$(TargetDir)libSWBF2.dylib"</PostBuildEvent>
+    -->
+    <PostBuildEvent>cp "/Users/will/projects/swbf2/libSWBF2/LibSWBF2/build/libSWBF2.dylib" "$(TargetDir)libSWBF2.dylib"</PostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(OS)' == 'Unix' and  !$([System.IO.File]::Exists('/usr/lib/libstdc++.dylib')) and !$([System.IO.File]::Exists('/usr/lib/libc.dylib'))">

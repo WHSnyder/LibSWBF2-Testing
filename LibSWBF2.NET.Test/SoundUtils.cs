@@ -17,16 +17,16 @@ namespace LibSWBF2.NET.Test
 {
     class SoundUtils
     {
-        public static bool WriteToWAV(string path, Sound sound)
+        public static bool WriteToWAV(string path, Sound sound, short[] data_ = null)
         {
-        	if (!sound.HasData) return false;
+            if (!sound.HasData && data_ == null) return false;
             
-            uint numsamples = (uint) sound.NumSamples;
             ushort numchannels = (ushort) sound.NumChannels;
             ushort samplelength = 2; // in bytes
             uint samplerate = (uint) sound.SampleRate;
 
-            short[] data = sound.GetPCM16();
+            short[] data = data_ == null ? sound.GetPCM16() : data_;
+            uint numsamples = data_ == null ? (uint) sound.NumSamples : (uint) data_.Length;
 
 
             FileStream f = new FileStream(path, FileMode.Create);

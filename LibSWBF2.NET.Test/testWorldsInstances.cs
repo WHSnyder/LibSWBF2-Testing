@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using LibSWBF2.Logging;
 using LibSWBF2.Wrappers;
 using LibSWBF2.Types;
+using LibSWBF2.Utils;
 
 namespace LibSWBF2.NET.Test
 {
@@ -31,7 +32,31 @@ namespace LibSWBF2.NET.Test
             foreach (World world in worlds)
             {
                 Console.WriteLine("\n" + world.Name);
+
+                Console.WriteLine("  Barriers:");
+                Barrier[] barriers = world.GetBarriers();
+                foreach (Barrier barrier in barriers)
+                {
+                    Console.WriteLine("\n\tBarrier: " + barrier.Name);
                 
+                    Console.WriteLine("\t  Size: " + barrier.Size.ToString());
+                    Console.WriteLine("\t  Position: " + barrier.Position.ToString());
+                    Console.WriteLine("\t  Rotation: " + barrier.Rotation.ToString());
+                    Console.WriteLine("\t  Flag: " + barrier.Flag);
+                }
+
+                /*
+                Console.WriteLine("  HintNodes:");
+                HintNode[] hintNodes = world.GetHintNodes();
+                foreach (HintNode hintNode in hintNodes)
+                {
+                    Console.WriteLine("\n\tHintNode: " + hintNode.Name);
+                    Console.WriteLine("\t  Position: " + hintNode.Position.ToString());
+                    Console.WriteLine("\t  Rotation: " + hintNode.Rotation.ToString());
+                    Console.WriteLine("\t  Type: " + hintNode.Type);
+                }
+                */
+
                 /*
                 Console.WriteLine("  Instances: ");
                 foreach (Instance instance in world.GetInstances())
@@ -66,20 +91,31 @@ namespace LibSWBF2.NET.Test
                         }
                     }                  
                 }
+                */
 
-
+                /*
                 Console.WriteLine("  Regions:");
                 foreach (Region region in world.GetRegions())
                 {
-                    Console.WriteLine("\n\tRegion: " + region.name);
+                    Console.WriteLine("\n\tRegion: " + region.Name);
                 
-                    Console.WriteLine("\t  Size: " + region.size.ToString());
-                    Console.WriteLine("\t  Rotation: " + region.rotation.ToString());
-                    Console.WriteLine("\t  Type: " + region.type);
+                    Console.WriteLine("\t  Size: " + region.Size.ToString());
+                    Console.WriteLine("\t  Rotation: " + region.Rotation.ToString());
+                    Console.WriteLine("\t  Type: " + region.Type);
+
+                    region.GetProperties(out uint[] properties, out string[] values);
+
+                    Console.WriteLine("\t  " + properties.Length.ToString() + " properties:");
+
+                    for (int i = 0; i < properties.Length; i++)
+                    {
+                        Console.WriteLine(String.Format("\t\t{0}: {1}", HashUtils.FNVToString(properties[i],true), values[i]));
+                    }
                 }
-                */ 
+                */
+                 
 
-
+                /*
                 Console.WriteLine("  Animations:");
                 foreach (WorldAnimation anim in world.GetAnimations())
                 {
@@ -118,6 +154,7 @@ namespace LibSWBF2.NET.Test
                         Console.WriteLine($"\t    {child}");
                     }
                 }
+                */
             }
 
             return 1;
